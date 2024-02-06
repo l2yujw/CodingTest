@@ -1,10 +1,10 @@
 from sys import stdin
 
-def prime(x) :
-  for i in range(2,x) :
+def isPrime(x) :
+  for i in range(2,int(x**0.5)+1) :
     if x%i == 0 :
-      return 0
-  return 1
+      return False
+  return True
 
 input = stdin.readline
 M = int(input())
@@ -14,11 +14,11 @@ arr = []
 for num in range(M, N+1):
     if num == 1:
         continue
-    if prime(int(num)) == 1:
+    if isPrime(int(num)):
         arr.append(num)
 
-if len(arr) != 0:
+if len(arr) == 0:
+    print(-1)
+else:
     print(sum(arr))
     print(arr[0])
-else:
-    print(-1)
