@@ -1,18 +1,17 @@
 from sys import stdin
 
+def prime(x) :
+  for i in range(2,x) :
+    if x%i == 0 :
+      return 0
+  return 1
+
 input = stdin.readline
 N = int(input())
-primeNum = list(map(int, input().split()))
-count = 0
-for num in primeNum:
-    if num == 1:
-        continue
-
-    for x in range(2, num):
-        if num % x == 0:
-            break
-
-    else:
-        count += 1
-
-print(count)
+arr = input().split()
+sum = 0
+for i in arr :
+  if i == '1' :
+    continue
+  sum += prime(int(i))
+print(sum)
