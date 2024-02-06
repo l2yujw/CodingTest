@@ -1,12 +1,8 @@
-T = int(input())
+import sys
 
-for i in range(T):
-    n = int(input())
-    count = 0
+N = int(input())
 
-    while n > 0:
-        if n % 2 == 1:
-            print(count, end=" ")
-        n //= 2
-        count += 1
-    print()
+li = [sys.stdin.readline() for _ in range(N)]
+li.sort(key=lambda x: tuple(map(int, x.split())))
+
+print(''.join(li))

@@ -1,0 +1,1 @@
+N, *arr = map(int, input().split())
