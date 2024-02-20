@@ -1,30 +1,16 @@
+import sys
+input=sys.stdin.readline
+
 while True:
-  str = input()
-  check = []
-  answer = 'yes'
-  if str == '.':
-    break
-  for s in str:
-    if s=='(' or s=='[':
-      check.append(s)
-    elif s == ')':
-      if not len(check):
-        answer = 'no'
-        break
-      else:
-        if check.pop(-1) != '(':
-          answer = 'no'
-          break
-    elif s == ']':
-      if not len(check):
-        answer = 'no'
-        break
-      else:
-        if check.pop() != '[':
-          answer = 'no'
-          break
-    else:
-      continue
-  if len(check):
-    answer = 'no'
-  print(answer)
+    s=input().rstrip()
+    if s==".":break
+    if s.count("(")!=s.count(")") or s.count("[")!=s.count("]"):print("no");continue
+    b=""
+    for i in s:
+        if i in "()[]":
+            b+=i
+    while "()" in b or "[]" in b:
+        if "()" in b:b=b.replace("()","")
+        if "[]" in b:b=b.replace("[]","")
+    if b=="":print("yes")
+    else:print("no")
