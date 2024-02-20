@@ -1,13 +1,15 @@
 import sys
-input=sys.stdin.readline
 
+def sort_num(a):
+    x, y = a.split()
+    return int(y) + int(x)/1000000
+
+input=sys.stdin.readline
 N = int(input())
 
 arr = []
 for _ in range(N):
-    x, y = map(int, input().split())
-    arr.append([y, x])
+    arr.append(input().strip())
+arr.sort(key=lambda a: sort_num(a))
 
-arr.sort()
-for y, x in arr:
-    print(x, y)
+print(*arr, sep="\n")
