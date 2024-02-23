@@ -1,38 +1,46 @@
 import sys
-sys.setrecursionlimit(10000)
 
-T = int(sys.stdin.readline())
+num = int(sys.stdin.readline())
 
-dx = [-1, 1, 0, 0]
-dy = [0, 0, -1, 1]
+row = [-1, 1, 0, 0]
+col = [0, 0, 1, -1]
 
-def dfs(x, y):
-  if x <= -1 or x >= N or y<= -1 or y>= M:
-    return False
+def bfs(x, y) :
+    
+    queue = [(x, y)]
+    matrix[x][y] = 0 
+    
+    while queue :
+        x, y = queue.pop(0)
+        
+        for i in range(4) :
+            nx = x + row[i]
+            ny = y + col[i]
+            
+            if nx < 0 or nx >= n or ny < 0 or ny >= m :
+                continue
+                
+            if matrix[nx][ny] == 1 :
+                queue.append((nx,ny))
+                matrix[nx][ny] = 0
 
-  if graph[x][y] == 1:
-    graph[x][y] = 0
-
-    for i in range(4):
-      dfs(x + dx[i], y+dy[i])
-
-    return True
-  return False
-
-answer = []
-for _ in range(T):
-  M, N, K = list(map(int, sys.stdin.readline().split()))  
-
-  graph = [[0]*M for _ in range(N)]
-
-  for _ in range(K):
-    x, y = map(int, input().split())
-    graph[y][x] = 1
-
-  cnt = 0
-  for i in range(N):
-    for j in range(M):
-      if dfs(i, j):
-        cnt +=1
-
-  print(cnt)
+for i in range(num) :
+    
+    n, m, k = map(int, sys.stdin.readline().split())
+    
+    matrix = [[0] * m for i in range(n)]
+    count = 0
+    
+    for i in range(k) :
+        
+        x, y = map(int, sys.stdin.readline().split())
+        matrix[x][y] = 1
+        
+        
+    for j in range(n) :
+        for k in range(m) :
+            if matrix[j][k] == 1:
+                bfs(j, k)
+                count += 1
+    
+    print(count)
