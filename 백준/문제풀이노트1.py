@@ -14,7 +14,7 @@ for i in range(10):
         continue
     else:
         availableNum.append(i)
-print("availableNum", availableNum)
+
 count = 0
 findMinDiff = []
 res = []
@@ -34,7 +34,7 @@ for x in N:
                 if check == diff:
                     findMinDiff.append(availableNum[k])
             break
-print("findMinDiff", findMinDiff)
+
 finalNearNum = []
 if len(findMinDiff) != 0:
     for r in findMinDiff:
@@ -49,7 +49,6 @@ if len(findMinDiff) != 0:
             finalNearNum.append(tmp)
 if len(finalNearNum) != 0:
     count += len(finalNearNum[0]) - len(res)
-print("finalNearNum", finalNearNum)
 
 listsToInt = []
 for y in finalNearNum:
@@ -58,19 +57,19 @@ for y in finalNearNum:
         result += y[-x - 1]*(10**x)
     listsToInt.append(result)
 
-print("listsToInt", listsToInt)
 
 NToInt=[]
 result = 0
 for x in range(len(N)):
     result += N[-x - 1]*(10**x)
 NToInt.append(result)
-print("NToInt", NToInt)
 
 if len(NToInt) != 0:
     minCount = abs(100 - NToInt[0])
     for i in range(len(listsToInt)):
         listsToInt[i] = abs(NToInt[0] - listsToInt[i])
+else:
+    minCount = abs(100 - NToInt[0])
 
 if len(listsToInt) != 0:
     count += min(listsToInt)
