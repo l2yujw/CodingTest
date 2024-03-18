@@ -26,6 +26,7 @@ def bfs(y, x):
                 graph[ny][nx] = graph[y][x] + 1
                 queue.append((ny, nx))
 
+    print(graph)
     return graph[n-1][m-1]
 
 print(bfs(0, 0))
