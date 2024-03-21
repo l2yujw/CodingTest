@@ -1,2 +1,2 @@
-x=16
-print(x**0.5 +1)
+arr = ['1', '2', '3']
+print(' '.join(arr))

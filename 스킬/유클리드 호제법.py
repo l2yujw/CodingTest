@@ -5,7 +5,7 @@ def gcd(a, b):
 # main
 n = int(input())
 for _ in range(n):
-    a, b= map(int, input().split(' '))
+    a, b= map(int, input().split())
 
     GCD = gcd(a,b) #최대공약수
     LCM = int(a*b/GCD) #최소공배수

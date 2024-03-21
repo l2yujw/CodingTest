@@ -1,78 +1,50 @@
-from sys import stdin
 
-input = stdin.readline
-N = list(map(int, str(input().rstrip())))
-M = int(input())
-if M != 0:
-    broken = list(map(int, input().split()))
-else:
-    broken = []
+data = {1, 2, 3}
+print(data)
 
-availableNum = []
-for i in range(10):
-    if i in broken:
-        continue
-    else:
-        availableNum.append(i)
-print("availableNum", availableNum)
-count = 0
-findMinDiff = []
-res = []
-for x in N:
-    if x in availableNum:
-        count += 1
-        res.append(x)
-    else:
-        if len(availableNum) != 0:
-            diff = abs(x - availableNum[0])
-            for k in range(1, len(availableNum)):
-                check = abs(x - availableNum[k])
-                if check < diff:
-                    diff = min(diff, check)
-            for k in range(0, len(availableNum)):
-                check = abs(x - availableNum[k])
-                if check == diff:
-                    findMinDiff.append(availableNum[k])
-            break
-print("findMinDiff", findMinDiff)
-finalNearNum = []
-if len(findMinDiff) != 0:
-    for r in findMinDiff:
-        tmp = res.copy()
-        if r < N[len(res)]:
-            for _ in range(len(N) - len(res)):
-                tmp.append(max(availableNum))
-            finalNearNum.append(tmp)
-        else:
-            for _ in range(len(N) - len(res)):
-                tmp.append(min(availableNum))
-            finalNearNum.append(tmp)
-if len(finalNearNum) != 0:
-    count += len(finalNearNum[0]) - len(res)
-print("finalNearNum", finalNearNum)
+data.add(4)
+print(data)
 
-listsToInt = []
-for y in finalNearNum:
-    result = 0
-    for x in range(len(y)):
-        result += y[-x - 1]*(10**x)
-    listsToInt.append(result)
+data.update([5, 6])
+print(data)
 
-print("listsToInt", listsToInt)
+data.remove(3)
+print(data)
 
-NToInt=[]
-result = 0
-for x in range(len(N)):
-    result += N[-x - 1]*(10**x)
-NToInt.append(result)
-print("NToInt", NToInt)
+import heapq
 
-if len(NToInt) != 0:
-    minCount = abs(100 - NToInt[0])
-    for i in range(len(listsToInt)):
-        listsToInt[i] = abs(NToInt[0] - listsToInt[i])
+def heapsort(iterable):
+    h = []
+    result = []
+    for value in iterable:
+        heapq.heappush(h, value)
+    for _ in range(len(h)):
+        result.append(heapq.heappop(h))
+    return result
 
-if len(listsToInt) != 0:
-    count += min(listsToInt)
+result = heapsort([1, 3, 5, 7, 9, 2, 4, 6, 8, 0])
 
-print(min(minCount, count))
+print(result)
+
+# 최대 힙
+def heapsort_max(iterable):
+    h = []
+    result = []
+    for value in iterable:
+        heapq.heappush(h, -value)
+    for _ in range(len(h)):
+        result.append(-heapq.heappop(h))
+    return result
+
+result = heapsort([1, 3, 5, 7, 9, 2, 4, 6, 8, 0])
+
+print(result)
+
+
+from bisect import bisect_left, bisect_right
+
+a = [1, 2, 4, 4, 8]
+x = 4
+
+print(bisect_left(a, x))
+print(bisect_right(a, x))

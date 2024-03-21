@@ -50,19 +50,41 @@ print(b)
 key_list = list(b.keys())
 print(key_list)
 
-#집합 자료형
-# data = set([1, 2, 3])
-# print(data)
-#
-# n = int(input())
-# data = list(map(int, input().split())) #map은 요소를 특정 데이터 타입으로 바꿈 split은 공백 기준 값 적용
-#
-# print(n)
-# print(data)
+# 집합 자료형 초기화 방법1
+data = set([1, 2, 3])
+print(data)
 
-# import sys
+# 집합 자료형 초기화 방법2
+data = {1, 1, 2, 3, 4, 4, 5}
+print(data)
+
+a = {1, 2, 3, 4, 5}
+b = {3, 4, 5, 6, 7}
+
+print(a | b) # 합집합
+print(a & b) # 교집합
+print(a - b) # 차집합
+
+
+data = {1, 2, 3}
+print(data)
+
+data.add(4)
+print(data)
+
+data.update([5, 6])
+print(data)
+
+
+n = int(input())
+data = list(map(int, input().split())) #map은 요소를 특정 데이터 타입으로 바꿈 split은 공백 기준 값 적용
+
+print(n)
+print(data)
+
+import sys
 # data = sys.stdin.readline().rstrip() #input보다 빠름
-# print(data)
+print(data)
 
 answer = 7
 print(f"정답은 {answer}입니다.")
@@ -115,7 +137,7 @@ data2 = ['A', 'B', 'C']
 result2 = list(permutations(data2, 3)) # 서로 다른 n개에서 서로 다른 r개를 선택하여 일렬로 나열하는 것
 print(result2)
 
-from itertools import  combinations
+from itertools import combinations
 
 result2 = list(combinations(data2, 2))
 print(result2)
@@ -127,6 +149,7 @@ print(result)
 from itertools import combinations_with_replacement # 두개를 뽑는 모든 조합 구하기 (중복 허용)
 result = list(combinations_with_replacement(data2, 2))
 print(result)
+
 
 from collections import Counter
 
