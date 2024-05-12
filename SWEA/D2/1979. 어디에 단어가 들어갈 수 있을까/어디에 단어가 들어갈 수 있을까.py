@@ -1,26 +1,19 @@
 T = int(input())
 for test_case in range(1, T + 1):
-    n , k =map(int, input().split())
-    board = [list(map(int, input().split())) for _ in range(n)]
-    result = 0
-    block = 0
-    for i in range(n):
-        for x in range(n + 1):
-            if x == n or board[i][x] == 0:
-                if block == k:
-                    result += 1
-                block = 0
-            else:
-                block += 1
-        block = 0
+    N, K = map(int, input().split())
 
-        for x in range(n + 1):
-            if x == n or board[x][i] == 0:
-                if block == k:
-                    result += 1
-                block = 0
-            else:
-                block += 1
-        block = 0
+    board = [list(input().split()) for _ in range(N)]
 
-    print("#%d %d" %(test_case, result))
+    match_string = '1' * K
+
+    row_cnt = 0
+    for row in board:
+        str_row = "".join(row).split("0")
+        row_cnt += str_row.count(match_string)
+
+    col_cnt = 0
+    for col in list(zip(*board)):
+        str_col = "".join(col).split("0")
+        col_cnt += str_col.count(match_string)
+
+    print(f"#{test_case} {row_cnt + col_cnt}")
