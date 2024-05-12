@@ -9,8 +9,6 @@ for test_case in range(1, T + 1):
         if x[0] == 1:
             v += x[1]
         elif x[0] == 2:
-            v -= x[1]
-            if v < 0:
-                v = 0
+            v = max(0, v - x[1]) 
         d += v
     print("#%d %d" % (test_case, d))
