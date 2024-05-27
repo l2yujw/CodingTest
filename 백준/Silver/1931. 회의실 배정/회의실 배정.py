@@ -1,15 +1,19 @@
+from sys import stdin
+
+input = stdin.readline
 n = int(input())
 
 arr = []
-for i in range(n):
-    arr.append(list(map(int, input().split())))
+for _ in range(n):
+    s, e = map(int, input().split())
+    arr.append((e, s))
 
-arr.sort(key=lambda x:(x[1], x[0]))
+arr.sort()
 
-ans = 0
-end = 0
-for s, e in arr:
-    if end <= s:
+end, _ = arr[0]
+ans = 1
+for e, s in arr[1:]:
+    if s >= end:
         ans += 1
         end = e
 print(ans)
