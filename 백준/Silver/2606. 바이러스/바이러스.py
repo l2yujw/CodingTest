@@ -1,22 +1,23 @@
-N = int(input())
-M = int(input())
+def dfs(x):
+    visited[x] = True
+    for i in graph[x]:
+        if not visited[i]:
+            dfs(i)
 
-graph = [[] for _ in range(N+1)]	
 
-for i in range(M):
+c = int(input().rstrip())
+
+net = int(input().rstrip())
+graph = [[] for _ in range(c + 1)]
+
+for i in range(net):
     a, b = map(int, input().split())
     graph[a].append(b)
-    graph[b].append(a)				# 양방향
-visited = [False] * (N+1)
-count = -1
+    graph[b].append(a)
 
-def DFS(v):
-    visited[v] = True
-    global count
-    count += 1
-    for i in graph[v]:
-        if not visited[i]:
-            DFS(i)
+for i in graph:
+    i.sort()
 
-DFS(1)
-print(count)
+visited = [False] * (c + 1)
+dfs(1)
+print(visited.count(True) - 1)
