@@ -1,3 +1,6 @@
+from sys import stdin
+input = stdin.readline
+
 def dfs(x):
     visited[x] = True
     for i in graph[x]:
