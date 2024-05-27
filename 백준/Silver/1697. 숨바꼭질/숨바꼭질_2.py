@@ -24,3 +24,5 @@ for i in range(n + 1, k + 1):
         arr[i] = min(left, right, mid, prev)
 
 print(arr[k])
+
+#런타임 오류남
