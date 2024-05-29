@@ -1,16 +1,18 @@
-n = int(input())
-m = int(input())
-s = list(input())
+N = int(input())
+M = int(input())
+S = input()
 
-p = ['I', 'O', 'I']
+cursor, count, result = 0, 0, 0
 
-for i in range(1, n):
-    p.append('O')
-    p.append('I')
+while cursor < (M - 1):
+    if S[cursor:cursor + 3] == 'IOI':
+        count += 1
+        cursor += 2
+        if count == N:
+            result += 1
+            count -= 1
+    else:
+        cursor += 1
+        count = 0
 
-ans = 0
-for i in range(0, m - len(p) + 1):
-    if s[i:i + len(p)] == p:
-        ans += 1
-
-print(ans)
+print(result)
