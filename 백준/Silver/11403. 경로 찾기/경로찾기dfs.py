@@ -1,11 +1,15 @@
-n = int(input())
-map = [list(map(int, input().split())) for _ in range(n)]
-
-for k in range(n):
+def dfs(start):
     for i in range(n):
-        for j in range(n):
-            if map[i][k] == 1 and map[k][j] == 1:
-                map[i][j] = 1
+        if visited[i] == 0 and board[start][i]:
+            visited[i] = 1
+            dfs(i)
 
-for i in map:
-    print(*i)
+n = int(input())
+
+board = [list(map(int,input().split())) for _ in range(n)]
+
+visited = [0] * n
+for i in range(n):
+    dfs(i)
+    print(*visited) #한 행씩 처리 하기
+    visited = [0] * n
