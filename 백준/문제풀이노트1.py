@@ -1,19 +1,12 @@
-def find():
-    if len(res) == m:
-        print(*res)
-        return
-    for i in range(n):
-        if not visited[i]:
-            res.append(arr[i])
-            visited[i] = True
-            find()
-            visited[i] = False
-            res.pop()
+A, B = map(int, input().split())
+i = 1
 
-
-n, m = map(int, input().split())
-arr = sorted(list(map(int, input().split())))
-
-visited = [False] * n
-res = []
-find()
+while A < B:
+    if B % 10 == 1:
+        B //= 10
+    elif not B % 2:
+        B //= 2
+    else:
+        B = 0
+    i += 1
+print(-1 if A > B else i)
