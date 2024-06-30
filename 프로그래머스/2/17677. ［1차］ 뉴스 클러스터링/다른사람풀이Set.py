@@ -1,4 +1,5 @@
 import math
+import re
 
 def solution(str1, str2):
     str1 = [str1[i:i+2].lower() for i in range(0, len(str1)-1) if not re.findall('[^a-zA-Z]+', str1[i:i+2])]
