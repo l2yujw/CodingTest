@@ -1,11 +1,35 @@
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
 def solution(s):
-    li=[]
-    for i in s.split("},"):
-        li.append(i.replace("{","").replace("}","").split(","))
-    li.sort(key=len)
-    answer=[]
-    for i in li:
-        for j in i:
-            if j not in answer:
-                answer.append(j)
-    return list(map(int,answer))
+    answer = []
+
+    s1 = s.lstrip('{').rstrip('}').split('},{')
+
+    new_s = []
+    for i in s1:
+        new_s.append(i.split(','))
+
+    new_s.sort(key = len)
+
+    for i in new_s:
+        for j in range(len(i)):
+            if int(i[j]) not in answer:
+                answer.append(int(i[j]))
+
+    return answer
