@@ -16,5 +16,7 @@ public class StringFunc {
 
         int a = Integer.parseInt("1");        // 1
         String b = Integer.toString(1);		  // "1"
+
+        String str7 = str6.substring(4);
     }
 }
