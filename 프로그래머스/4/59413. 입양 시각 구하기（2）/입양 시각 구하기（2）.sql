@@ -5,4 +5,4 @@ SELECT @hour := @hour + 1 hour,
     FROM animal_outs
     WHERE HOUR(datetime) = @hour) count
 FROM animal_outs
-WHERE @hour + 1 < 24
+WHERE @hour + 1 < 24 
