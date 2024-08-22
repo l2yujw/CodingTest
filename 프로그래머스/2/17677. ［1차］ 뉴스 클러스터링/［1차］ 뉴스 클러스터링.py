@@ -7,6 +7,7 @@ def solution(str1, str2):
         if str1[i].isalpha() and str1[i + 1].isalpha():
             left.append([str1[i] + str1[i + 1]])
 
+            
     for i in range(0, len(str2) - 1):
         if str2[i].isalpha() and str2[i + 1].isalpha():
             right.append([str2[i] + str2[i + 1]])
