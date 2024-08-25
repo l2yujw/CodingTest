@@ -6,6 +6,7 @@ class Solution {
         Set<String> record = new HashSet<>();
 
         record.add(words[0]);
+        
         char last = words[0].charAt(words[0].length() - 1);
         for (int i = 1; i < words.length; i++) {
             if (record.contains(words[i]) || last != words[i].charAt(0)) {
