@@ -11,7 +11,6 @@ def solution(n, stations, w):
     for station in stations:
         dists.append([station - w, station + w])
     
-    dists.sort(key = lambda x:x[0])
     length = w * 2 + 1
     
     pos = 1
