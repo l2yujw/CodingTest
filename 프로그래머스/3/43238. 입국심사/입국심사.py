@@ -8,11 +8,7 @@ def solution(n, times):
     left, right = 1, max(times) * n
     while left <= right:
         mid = (left + right) // 2
-        p = 0
-        for time in times:
-            p += mid // time
-            if p >= n:
-                break
+        p = sum(mid // time for time in times)
         
         if p >= n:
             answer = mid
