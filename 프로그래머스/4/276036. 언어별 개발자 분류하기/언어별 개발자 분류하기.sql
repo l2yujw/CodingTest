@@ -1,19 +1,28 @@
--- 코드를 작성해주세요
--- skillcodes
--- developers
--- grade별 개발자의 정보
--- A: Front, Python B:C# C: 그외 Front
-WITH f AS (
-    SELECT SUM(code)
-    FROM skillcodes
-    WHERE category = 'Front End'
+WITH
+frontend_code AS (
+    SELECT SUM(code) AS total FROM skillcodes WHERE category = 'Front End'
+),
+python_code AS (
+    SELECT code AS value FROM skillcodes WHERE name = 'Python'
+),
+csharp_code AS (
+    SELECT code AS value FROM skillcodes WHERE name = 'C#'
 )
 
-SELECT CASE
-            WHEN skill_code & (SELECT * FROM f) AND skill_code & (SELECT code FROM skillcodes WHERE name = 'Python') THEN 'A'
-            WHEN skill_code & (SELECT code FROM skillcodes WHERE name = 'C#') THEN 'B'
-            WHEN skill_code & (SELECT * FROM f) THEN 'C'
-        END AS grade, id, email
-FROM developers
-HAVING grade IS NOT NULL
-ORDER BY grade, id
+SELECT
+    CASE
+        WHEN d.skill_code & fc.total AND d.skill_code & pc.value THEN 'A'
+        WHEN d.skill_code & cc.value THEN 'B'
+        WHEN d.skill_code & fc.total THEN 'C'
+    END AS grade,
+    d.id,
+    d.email
+FROM developers d
+CROSS JOIN frontend_code fc
+CROSS JOIN python_code pc
+CROSS JOIN csharp_code cc
+WHERE 
+    (d.skill_code & fc.total AND d.skill_code & pc.value) OR
+    (d.skill_code & cc.value) OR
+    (d.skill_code & fc.total)
+ORDER BY grade, id;
