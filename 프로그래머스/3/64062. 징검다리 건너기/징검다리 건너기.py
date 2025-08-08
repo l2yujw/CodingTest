@@ -1,3 +1,7 @@
+# 디딤돌 밟으면 -1
+# 0되면 무시
+# stones: 디딤돌 숫자, k: 점프력
+# return 최대 몇명
 def solution(stones, k):
     answer = 0
     left, right = 1, max(stones)
