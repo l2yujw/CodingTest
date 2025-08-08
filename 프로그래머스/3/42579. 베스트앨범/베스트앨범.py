@@ -1,29 +1,37 @@
-# 장르별 가장 많이 재생된 노래 두개씩 묶음
-# 1. 속한 노래가 많이 재생된 장르
-# 2. 장르 내에서 가장 많이 재생된
-# 3. 장르내에서 재생 같 => 고유번호 낮은
-# genres: 장르, plays: 노래별 재생 횟수
-# 고유번호 순서대로 return
-# genres[i] 고유번호 i, play[i] 재생횟수 i
-# 가장 횟수많 장르 많부터 2개, 순차적으로 진행
+# 장르별 가장 많이 재생된 노래 (두 개씩)
+# 고유 번호 구분
+# 1. 장르별, 2. 장르 내부, 2-1. 같으면 고유번호 낮은 노래 우선
+
+# genres: 장르, plays: 재생 횟수
+# return 베스트 앨범에 들어갈 노래의 고유번호 순서대로
+
+# genres[i]: 고유번호 i
+# plays[i]: 고유번호 i
+# 장르에 속한게 하나 -> 한곡만 선택
 
 def solution(genres, plays):
-    answer = []
-    dic = {}
-    dic_total = {}
-    for i, (genre, play) in enumerate(zip(genres, plays)):
-        if genre not in dic:
-            dic[genre] = [(i, play)]
-        else:
-            dic[genre].append((i, play))
-            
-        if genre not in dic_total:
-            dic_total[genre] = play
-        else:
-            dic_total[genre] += play
-            
-    for (k, v) in sorted(dic_total.items(), key = lambda x: x[1], reverse = True):
-        for (i, p) in sorted(dic[k], key = lambda x: x[1], reverse = True)[:2]:
-            answer.append(i)
+    songs = list(enumerate(zip(genres, plays)))
+    songs.sort(key = lambda x:(-x[1][1], x[0]))
     
+    best = {}
+    best_genre = {}
+    for i, (genre, play) in songs:
+        if genre not in best_genre:
+            best_genre[genre] = play
+        else:
+            best_genre[genre] += play
+            
+    sorted_genres = sorted(best_genre.items(), key = lambda x:-x[1])
+    
+    answer = []
+    
+    for genre, _ in sorted_genres:
+        count = 0
+        for i, (g, _) in songs:
+            if g == genre:
+                answer.append(i)
+                count += 1
+                if count == 2:
+                    break
+                    
     return answer
