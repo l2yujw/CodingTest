@@ -7,7 +7,8 @@ def solution(tickets):
     
     graph = defaultdict(list)
     
-    for start, end in sorted(tickets, reverse=True):
+    tickets.sort(key = lambda x: x[1], reverse = True)
+    for start, end in tickets:
         graph[start].append(end)
     
     route = []
