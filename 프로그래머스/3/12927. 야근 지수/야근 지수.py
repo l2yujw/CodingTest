@@ -1,3 +1,5 @@
+# 야근피로도 = 남은일 ** 2 sum
+
 import heapq
 
 def solution(n, works):
