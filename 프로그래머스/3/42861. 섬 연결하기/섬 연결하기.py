@@ -1,20 +1,26 @@
-# n개의 섬, costs: n개의 섬사이에 다리 건설 비용
-# 최소 비용 모든 섬 통행 가능하도록
-# return 최소비용
-# 각각 출발
 def solution(n, costs):
+    # 간선 비용 기준 정렬
+    costs.sort(key=lambda x: x[2])
+    
+    # 부모 테이블 초기화
+    parent = [i for i in range(n)]
+    
+    def find(x):
+        if parent[x] != x:
+            parent[x] = find(parent[x])  # 경로 압축
+        return parent[x]
+    
+    def union(a, b):
+        root_a = find(a)
+        root_b = find(b)
+        if root_a != root_b:
+            parent[root_b] = root_a
+            return True
+        return False
+
     answer = 0
-    costs.sort(key = lambda x: x[2])
-    connect = set([costs[0][0]])
-    
-    while len(connect) != n:
-        for cost in costs:
-            if cost[0] in connect and cost[1] in connect:
-                continue
-            if cost[0] in connect or cost[1] in connect:
-                connect.update([cost[0], cost[1]])
-                answer += cost[2]
-                break
-                
+    for a, b, cost in costs:
+        if union(a, b):  # 사이클이 아니라면 연결
+            answer += cost
+            
     return answer
-    
