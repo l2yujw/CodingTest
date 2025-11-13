@@ -5,8 +5,8 @@
 SELECT  ai.name, ai.datetime
 FROM    animal_ins ai
 WHERE   ai.animal_id NOT IN (
-                        SELECT  ao.animal_id
-                        FROM    animal_outs ao
-                    )
+            SELECT  ao.animal_id
+            FROM    animal_outs ao
+        )
 ORDER BY    ai.datetime
 LIMIT   3
