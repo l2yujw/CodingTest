@@ -1,44 +1,45 @@
+# dfs bfs 탐색
+# 정점 여러개 -> 작은것 부터
+# n:정점, m:간선, v:시작번호
+
 from collections import deque
 
 def dfs(v, graph, visited):
     visited[v] = True
-    print(v, end=' ')
-    for x in graph[v]:
-        if not visited[x]:
-            dfs(x, graph, visited)
+    answer_dfs.append(v)
+    for w in graph[v]:
+        if not visited[w]:
+            dfs(w, graph, visited)
+
 
 def bfs(v, graph, visited):
-    q = deque()
-    q.append(v)
     visited[v] = True
+    answer_bfs.append(v)
+    q = deque([v])
     while q:
         l = q.popleft()
-        print(l, end=' ')
-        for x in graph[l]:
-            if not visited[x]:
-                visited[x] = True
-                q.append(x)
-
-
-def solution(start, graph, type):
-    visited = [False] * len(graph)
-    if type == 'dfs':
-        dfs(start, graph, visited)
-    if type == 'bfs':
-        bfs(start, graph, visited)
+        for w in graph[l]:
+            if not visited[w]:
+                visited[w] = True
+                answer_bfs.append(w)
+                q.append(w)
 
 
 n, m, v = map(int, input().split())
-graph = [[] for _ in range(n+1)]
+graph = [[] for _ in range(n + 1)]
+answer_dfs = []
+answer_bfs = []
 
 for _ in range(m):
     a, b = map(int, input().split())
     graph[a].append(b)
     graph[b].append(a)
 
-for i in graph:
-    i.sort()
+for g in graph:
+    g.sort()
 
-solution(v, graph, "dfs")
-print()
-solution(v, graph, "bfs")
+dfs(v, graph, [False] * (n+1))
+bfs(v, graph, [False] * (n+1))
+
+print(*answer_dfs)
+print(*answer_bfs)
