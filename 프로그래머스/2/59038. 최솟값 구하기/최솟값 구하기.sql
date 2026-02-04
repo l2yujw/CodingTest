@@ -1,3 +1,3 @@
 -- 코드를 입력하세요
-SELECT min(datetime) as '시간'
-from animal_ins 
+SELECT MIN(datetime) AS '시간'
+FROM animal_ins

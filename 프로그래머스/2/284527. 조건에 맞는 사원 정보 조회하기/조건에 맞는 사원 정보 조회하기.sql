@@ -1,9 +1,19 @@
--- 코드를 작성해주세요
-select  sum(score) as score, g.emp_no, e.emp_name, e.position, e.email
-from    hr_employees e, hr_grade g
-where   e.emp_no = g.emp_no
-group by    year, emp_no
-having      g.year = '2022'
-order by    1 desc
-limit   1
-        
+SELECT
+    SUM(g.score) AS score,
+    e.emp_no,
+    e.emp_name,
+    e.position,
+    e.email
+FROM hr_employees e
+JOIN hr_grade g ON e.emp_no = g.emp_no
+WHERE g.year = '2022'
+GROUP BY e.emp_no, e.emp_name, e.position, e.email
+HAVING SUM(g.score) = (
+    SELECT MAX(total_score)
+    FROM (
+        SELECT SUM(score) AS total_score
+        FROM hr_grade
+        WHERE year = '2022'
+        GROUP BY emp_no
+    ) AS sub
+)
