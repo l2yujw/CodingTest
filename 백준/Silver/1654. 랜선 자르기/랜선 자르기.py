@@ -1,21 +1,21 @@
 import sys
 
-k, n = map(int, sys.stdin.readline().split())
-arr = []
+K, N = map(int, sys.stdin.readline().split())
+lines = [int(input()) for _ in range(K)]
 
-for i in range(k):
-    arr.append(int(input()))
+def binary_search():
+    left, right = 1, max(lines)
 
-start = 1
-end = max(arr)
+    while left < right:
+        mid = (left + right + 1) // 2
 
-while (start <= end):
-    mid = (start + end) // 2
-    cnt = 0
-    for i in range(k):
-        cnt += arr[i] // mid
-    if cnt >= n:
-        start = mid + 1
-    else:
-        end = mid - 1
-print(end)
+        count = sum(l // mid for l in lines)
+
+        if count >= N:
+            left = mid
+        else:
+            right = mid - 1
+
+    return left
+
+print(binary_search())
