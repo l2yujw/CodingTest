@@ -1,22 +1,23 @@
-import sys
+N, M = map(int, input().split())
+heights = list(map(int, input().split()))
 
-# 입력
-n, m = map(int, sys.stdin.readline().split())
-lst = list(map(int, sys.stdin.readline().split()))
+def binary_search(target):
+    left, right = 0, max(heights)
+    ans = 0
+    while left <= right:
+        mid = (left + right) // 2
+        total = 0
+        for h in heights:
+            if h > mid:
+                total += h - mid
 
-start, end = 1, max(lst)
+        if total >= target:
+            ans = mid
+            left = mid + 1
+        else:
+            right = mid - 1
 
-while start <= end:
-    sum = 0
-    mid = (start + end) // 2
+    return ans
 
-    for l in lst:
-        if l > mid:
-            sum += l - mid
 
-    if sum < m:
-        end = mid - 1
-    else:
-        start = mid + 1
-
-print(end)
+print(binary_search(M))
