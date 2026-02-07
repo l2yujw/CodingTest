@@ -1,56 +1,49 @@
 from collections import deque
 from sys import stdin
-input = stdin.readline
-N = int(stdin.readline())
-arr = deque()
 
-def queue(process):
-    command = process[0]
-    if command == 'push':
-        push(process)
-    elif command == 'pop':
-        pop()
-    elif command == 'size':
-        size()
-    elif command == 'empty':
-        empty()
-    elif command == 'front':
-        front()
-    elif command == 'back':
-        back()
-    else:
-        pass
-
-def push(process):
-    arr.append(process[1])
+def push(X):
+    stack.append(X)
 
 def pop():
-    if len(arr) == 0:
-        print(-1)
-    else:
-        print(arr.popleft())
+    if len(stack) == 0:
+        return -1
+    return stack.popleft()
 
 def size():
-    print(len(arr))
+    return len(stack)
 
 def empty():
-    if len(arr) == 0:
-        print(1)
-    else:
-        print(0)
+    if len(stack) == 0:
+        return 1
+    return 0
 
 def front():
-    if len(arr) > 0:
-        print(arr[0])
-    else:
-        print(-1)
+    if len(stack) == 0:
+        return -1
+    return stack[0]
 
 def back():
-    if len(arr) > 0:
-        print(arr[-1])
-    else:
-        print(-1)
+    if len(stack) == 0:
+        return -1
+    return stack[-1]
+
+input = stdin.readline
+
+N = int(input())
+stack = deque()
 
 for _ in range(N):
-    command = input().split()
-    queue(command)
+    command = list(input().split())
+
+    if command[0] == 'push':
+        push(command[1])
+    elif command[0] == 'pop':
+        print(pop())
+    elif command[0] == 'size':
+        print(size())
+    elif command[0] == 'empty':
+        print(empty())
+    elif command[0] == 'front':
+        print(front())
+    elif command[0] == 'back':
+        print(back())
