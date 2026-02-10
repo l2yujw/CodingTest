@@ -1,16 +1,29 @@
 import sys
-input=sys.stdin.readline
+input = sys.stdin.readline
 
 while True:
-    s=input().rstrip()
-    if s==".":break
-    if s.count("(")!=s.count(")") or s.count("[")!=s.count("]"):print("no");continue
-    b=""
-    for i in s:
-        if i in "()[]":
-            b+=i
-    while "()" in b or "[]" in b:
-        if "()" in b:b=b.replace("()","")
-        if "[]" in b:b=b.replace("[]","")
-    if b=="":print("yes")
-    else:print("no")
+    s = input().rstrip()
+    if s == ".":
+        break
+
+    stack = []
+    ok = True
+
+    for c in s:
+        if c == '(' or c == '[':
+            stack.append(c)
+        elif c == ')':
+            if not stack or stack[-1] != '(':
+                ok = False
+                break
+            stack.pop()
+        elif c == ']':
+            if not stack or stack[-1] != '[':
+                ok = False
+                break
+            stack.pop()
+
+    if ok and not stack:
+        print("yes")
+    else:
+        print("no")
