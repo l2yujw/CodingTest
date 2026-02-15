@@ -1,20 +1,23 @@
 from collections import deque
+import sys
+input = sys.stdin.readline
 
-n, k = map(int, input().split())
-max_num = 100000
-visited = [0] * (max_num + 1)
+N, K = map(int, input().split())
+limit = 100000
+visited = [0] * (limit + 1)
 
 def bfs():
     q = deque()
-    q.append(n)
+    q.append(N)
     while q:
         x = q.popleft()
-        if x == k:
+        if x == K:
             print(visited[x])
             break
         for j in (x - 1, x + 1, x * 2):
-            if 0 <= j <= max_num and not visited[j]:
+            if 0 <= j <= limit and not visited[j]:
                 visited[j] = visited[x] + 1
                 q.append(j)
+
 
 bfs()
